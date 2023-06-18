@@ -2,14 +2,22 @@ from typing import List
 
 
 def max_area(height: List[int]) -> int:
-    n = len(height)
-    areas = {}
-    for i in range(n - 1):
-        index_area = []
-        for j in range(i + 1, n):
-            index_area.append(min(height[i], height[j]) * (j - i))
-        areas[i] = max(enumerate(index_area), key=lambda x: x[1])[1]
-    return max(areas.values())
+    max_area = 0
+    i = 0
+    j = len(height) - 1
+
+    while j > i:
+        i_h = height[i]
+        j_h = height[j]
+
+        if i_h > j_h:
+            value = j_h * (j - i)
+            j -= 1
+        else:
+            value = i_h * (j - i)
+            i += 1
+        max_area = value if value > max_area else max_area
+    return max_area
 
 
 def test_example_1():
