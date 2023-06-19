@@ -4,8 +4,8 @@ def roman_to_int(s: str) -> int:
     last = len(s) - 1
     result = roman_map[s[last]]
 
-    for i in range(last - 1, 0, -1):
-        if s[i] < s[i + 1]:
+    for i in range(last - 1, -1, -1):
+        if roman_map[s[i]] < roman_map[s[i + 1]]:
             result -= roman_map[s[i]]
         else:
             result += roman_map[s[i]]
@@ -13,15 +13,15 @@ def roman_to_int(s: str) -> int:
 
 
 def test_example_1() -> int:
-    roman_to_int("III")
+    assert roman_to_int("III") == 3
 
 
 def test_example_2() -> int:
-    roman_to_int("LVIII")
+    assert roman_to_int("LVIII") == 58
 
 
 def test_example_3() -> int:
-    roman_to_int("MCMXCIV")
+    assert roman_to_int("MCMXCIV") == 1994
 
 
 if __name__ == "__main__":
